@@ -60,15 +60,6 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
 
             await self.accept()
 
-    async def receive_json(self, content, **kwargs):
-        message_type = content.get('type')
-        if message_type == 'create.trip':
-            await self.create_trip(content)
-        elif message_type == 'echo.message':
-            await self.echo_message(content)
-        elif message_type == 'update.trip':
-            await self.update_trip(content)
-
     async def create_trip(self, message):
         data = message.get('data')
         trip = await self._create_trip(data)
@@ -90,9 +81,6 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
             'type': 'echo.message',
             'data': trip_data,
         })
-
-    async def echo_message(self, message):
-        await self.send_json(message)
 
     async def update_trip(self, message):
         data = message.get('data')
@@ -139,3 +127,15 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
                 )
 
         await super().disconnect(code)
+
+    async def echo_message(self, message):
+        await self.send_json(message)
+
+    async def receive_json(self, content, **kwargs):
+        message_type = content.get('type')
+        if message_type == 'create.trip':
+            await self.create_trip(content)
+        elif message_type == 'echo.message':
+            await self.echo_message(content)
+        elif message_type == 'update.trip':
+            await self.update_trip(content)
