@@ -7,12 +7,10 @@ from django.contrib.auth.models import Group
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from PIL import Image
-
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
-from trips.serializers import TripSerializer, UserSerializer
 from trips.models import Trip
 
 PASSWORD = 'pAssw0rd!'
