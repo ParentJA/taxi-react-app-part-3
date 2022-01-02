@@ -11,12 +11,12 @@ class UserAdmin(DefaultUserAdmin):
 
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
-    fields = (
+    fields = ( # changed
         'id', 'pick_up_address', 'drop_off_address', 'status',
         'driver', 'rider',
         'created', 'updated',
     )
-    list_display = (
+    list_display = ( # changed
         'id', 'pick_up_address', 'drop_off_address', 'status',
         'driver', 'rider',
         'created', 'updated',
@@ -27,3 +27,4 @@ class TripAdmin(admin.ModelAdmin):
     readonly_fields = (
         'id', 'created', 'updated',
     )
+    

@@ -10,13 +10,13 @@ describe('Authentication', function () {
   });
 
   it('Cannot visit the sign up page when logged in.', function () {
-    cy.logIn(email);
+    cy.logIn(email); // changed
     cy.visit('/#/sign-up');
     cy.hash().should('eq', '#/');
   });
 
   it('Can log out.', function () {
-    cy.logIn(email);
+    cy.logIn(email); // changed
     cy.get('button').contains('Log out').click().should(() => {
       expect(window.localStorage.getItem('taxi.auth')).to.be.null;
     });
@@ -27,7 +27,7 @@ describe('Authentication', function () {
     cy.intercept('POST', 'sign_up', {
       statusCode: 400,
       body: {
-        'username': [
+        username: [
           'A user with that username already exists.'
         ]
       }
@@ -50,19 +50,19 @@ describe('Authentication', function () {
   });
 
   it('Can log in.', function () {
-    cy.logIn(email);
+    cy.logIn(email); // changed
     cy.hash().should('eq', '#/');
     cy.get('button').contains('Log out');
   });
 
   it('Cannot visit the login page when logged in.', function () {
-    cy.logIn(email);
+    cy.logIn(email); // changed
     cy.visit('/#/log-in');
     cy.hash().should('eq', '#/');
   });
 
   it('Cannot see links when logged in.', function () {
-    cy.logIn(email);
+    cy.logIn(email); // changed
     cy.get('button#signUp').should('not.exist');
     cy.get('button#logIn').should('not.exist');
   });
@@ -71,7 +71,7 @@ describe('Authentication', function () {
     cy.intercept('POST', 'log_in', {
       statusCode: 400,
       body: {
-        '__all__': [
+        __all__: [
           'Please enter a correct username and password. ' +
           'Note that both fields may be case-sensitive.'
         ]
