@@ -5,12 +5,12 @@ import json
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.files.uploadedfile import SimpleUploadedFile
-
 from PIL import Image
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
+from trips.serializers import TripSerializer, UserSerializer
 from trips.models import Trip
 
 PASSWORD = 'pAssw0rd!'
@@ -100,3 +100,4 @@ class HttpTripTest(APITestCase):
         response = self.client.get(trip.get_absolute_url())
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(str(trip.id), response.data.get('id'))
+        
