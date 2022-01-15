@@ -10,13 +10,13 @@ describe('Authentication', function () {
   });
 
   it('Cannot visit the sign up page when logged in.', function () {
-    cy.logIn(email); // changed
+    cy.logIn(email);
     cy.visit('/#/sign-up');
     cy.hash().should('eq', '#/');
   });
 
   it('Can log out.', function () {
-    cy.logIn(email); // changed
+    cy.logIn(email);
     cy.get('button').contains('Log out').click().should(() => {
       expect(window.localStorage.getItem('taxi.auth')).to.be.null;
     });
@@ -50,19 +50,19 @@ describe('Authentication', function () {
   });
 
   it('Can log in.', function () {
-    cy.logIn(email); // changed
+    cy.logIn(email);
     cy.hash().should('eq', '#/');
     cy.get('button').contains('Log out');
   });
 
   it('Cannot visit the login page when logged in.', function () {
-    cy.logIn(email); // changed
+    cy.logIn(email);
     cy.visit('/#/log-in');
     cy.hash().should('eq', '#/');
   });
 
   it('Cannot see links when logged in.', function () {
-    cy.logIn(email); // changed
+    cy.logIn(email);
     cy.get('button#signUp').should('not.exist');
     cy.get('button#logIn').should('not.exist');
   });
