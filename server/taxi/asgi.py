@@ -5,10 +5,10 @@ from django.urls import path
 
 from channels.routing import ProtocolTypeRouter, URLRouter
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'taxi.settings')
+
 from taxi.middleware import TokenAuthMiddlewareStack
 from trips.consumers import TaxiConsumer
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'taxi.settings')
 
 application = ProtocolTypeRouter({
     'http': get_asgi_application(),
